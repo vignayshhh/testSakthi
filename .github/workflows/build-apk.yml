@@ -29,7 +29,11 @@ jobs:
         uses: android-actions/setup-android@v2
 
       - name: Install dependencies
-        run: npm ci --cache /tmp/.npm --prefer-offline --no-audit
+        run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+          npm ci --prefer-offline --no-audit --no-fund
+          npx expo install --fix
 
       - name: Setup Expo CLI
         run: npm install -g @expo/cli eas-cli
@@ -45,13 +49,17 @@ jobs:
           eas build --platform android --profile preview --local \
           --output=./build/ \
           --non-interactive \
-          --clear-cache
+          --clear-cache \
+          --skip-project-configuration-check
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
           EXPO_ANDROID_KEYSTORE_ALIAS: ${{ secrets.EXPO_ANDROID_KEYSTORE_ALIAS }}
           EXPO_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.EXPO_ANDROID_KEYSTORE_PASSWORD }}
           EXPO_ANDROID_KEY_PASSWORD: ${{ secrets.EXPO_ANDROID_KEY_PASSWORD }}
+          NODE_ENV: production
+          JAVA_TOOL_OPTIONS: "-Xmx4g -XX:MaxMetaspaceSize=512m"
+          GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
