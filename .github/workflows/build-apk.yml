@@ -1,5 +1,5 @@
 name: Build SakthiCare APK
-# Updated workflow to fix artifact action version
+# Updated workflow to restart with EXPO_TOKEN
 
 on:
   workflow_dispatch: # Click "Run workflow" button in GitHub
