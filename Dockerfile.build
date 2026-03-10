@@ -1,0 +1,25 @@
+FROM node:18
+
+# Install Java
+RUN apt-get update && apt-get install -y openjdk-17-jdk
+
+# Install Android SDK
+ENV ANDROID_SDK_ROOT=/opt/android-sdk
+ENV PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
+
+RUN wget -q https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O android-tools.zip && \
+    unzip android-tools.zip && \
+    mkdir -p $ANDROID_SDK_ROOT/cmdline-tools/latest && \
+    mv cmdline-tools/* $ANDROID_SDK_ROOT/cmdline-tools/latest/ && \
+    yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses && \
+    $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+
+RUN npm install -g @expo/cli eas-cli
+
+CMD ["eas", "build", "--platform", "android", "--profile", "production", "--local"]

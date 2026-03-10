@@ -28,6 +28,7 @@
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH" android:value="ALWAYS"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="https://u.expo.dev/851cf94b-74b1-41e5-b4e4-9a611e90f253"/>
+    <service android:name=".NotificationRescheduleService" android:exported="false"/>
     <activity android:name=".MainActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.App.SplashScreen" android:exported="true" android:screenOrientation="portrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -40,8 +41,12 @@
         <data android:scheme="sakthicare"/>
       </intent-filter>
     </activity>
-    
-    <!-- Boot receiver for alarm persistence -->
+    <activity android:name="expo.modules.notifications.notifications.presentation.NotificationActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:exported="false" android:launchMode="singleTop" android:excludeFromRecents="true">
+      <intent-filter>
+        <action android:name="expo.modules.notifications.notifications.presentation.NotificationActivity"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+    </activity>
     <receiver android:name=".BootReceiver" android:exported="true">
       <intent-filter android:priority="1000">
         <action android:name="android.intent.action.BOOT_COMPLETED"/>
@@ -50,16 +55,5 @@
         <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
       </intent-filter>
     </receiver>
-    
-    <!-- Notification reschedule service -->
-    <service android:name=".NotificationRescheduleService" android:exported="false" />
-    
-    <!-- Full-screen intent activity -->
-    <activity android:name="expo.modules.notifications.notifications.presentation.NotificationActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:exported="false" android:launchMode="singleTop" android:excludeFromRecents="true">
-      <intent-filter>
-        <action android:name="expo.modules.notifications.notifications.presentation.NotificationActivity"/>
-        <category android:name="android.intent.category.DEFAULT"/>
-      </intent-filter>
-    </activity>
   </application>
 </manifest>
