@@ -88,6 +88,13 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
     namespace 'com.sakthicare.app'
+    
+    // Fix CMake version for New Architecture
+    externalNativeBuild {
+        cmake {
+            version rootProject.ext.cmakeVersion
+        }
+    }
     defaultConfig {
         applicationId 'com.sakthicare.app'
         minSdkVersion 24
@@ -96,6 +103,14 @@ android {
         versionName "1.0.0"
 
         buildConfigField "String", "REACT_NATIVE_RELEASE_LEVEL", "\"${findProperty('reactNativeReleaseLevel') ?: 'stable'}\""
+        
+        // Fix CMake for New Architecture
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++17"
+                arguments "-DANDROID_STL=c++_shared"
+            }
+        }
     }
     signingConfigs {
         debug {

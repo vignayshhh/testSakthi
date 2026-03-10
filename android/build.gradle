@@ -22,3 +22,8 @@ allprojects {
 
 apply plugin: "expo-root-project"
 apply plugin: "com.facebook.react.rootproject"
+
+// Fix CMake version for New Architecture
+ext {
+  cmakeVersion = "3.22.1"
+}
