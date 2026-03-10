@@ -31,8 +31,8 @@ jobs:
       - name: Install dependencies
         run: |
           npm cache clean --force
-          rm -rf node_modules package-lock.json
-          npm ci --prefer-offline --no-audit --no-fund
+          rm -rf node_modules
+          npm install --no-audit --no-fund
           npx expo install --fix
 
       - name: Setup Expo CLI
