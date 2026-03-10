@@ -13,6 +13,10 @@
       "resizeMode": "contain",
       "backgroundColor": "#1A0A2E"
     },
+    "androidStatusBar": {
+      "backgroundColor": "#1A0A2E",
+      "style": "light"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.sakthicare.app",
@@ -50,15 +54,6 @@
           "icon": "./assets/images/notification-icon.png",
           "color": "#9B59B6",
           "sounds": ["./assets/sounds/alarm.mp3"]
-        }
-      ],
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#1A0A2E"
         }
       ]
     ],
