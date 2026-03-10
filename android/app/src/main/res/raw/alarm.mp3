@@ -1,0 +1,2 @@
+This is a placeholder file. The actual alarm sound will be included in the production build.
+In development, the app will use system notifications with default sounds.

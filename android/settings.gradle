@@ -1,0 +1,22 @@
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    google()
+    mavenCentral()
+  }
+}
+
+rootProject.name = 'SakthiCare'
+include ':app'
+
+// Minimal configuration without Node.js dependencies
+println("Using minimal Gradle configuration without Node.js dependencies")
+
+// Try to apply React Native settings if available, but don't fail if not
+try {
+  apply plugin: "com.facebook.react.settings"
+  println("React Native settings plugin applied successfully")
+} catch (Exception e) {
+  println("Warning: React Native settings plugin not available: ${e.message}")
+  println("Continuing with minimal configuration...")
+}
