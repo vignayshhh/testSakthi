@@ -44,7 +44,8 @@ jobs:
         run: |
           eas build --platform android --profile preview --local \
           --output=./build/ \
-          --non-interactive
+          --non-interactive \
+          --clear-cache
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
