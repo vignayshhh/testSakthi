@@ -6,8 +6,9 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath('com.android.tools.build:gradle:8.0.2')
-    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10')
+    classpath('com.android.tools.build:gradle')
+    classpath('com.facebook.react:react-native-gradle-plugin')
+    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
   }
 }
 
@@ -18,3 +19,6 @@ allprojects {
     maven { url 'https://www.jitpack.io' }
   }
 }
+
+apply plugin: "expo-root-project"
+apply plugin: "com.facebook.react.rootproject"
